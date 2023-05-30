@@ -1,0 +1,1 @@
+export const VIEW_POINT = {width: 1080, height: 1024};
