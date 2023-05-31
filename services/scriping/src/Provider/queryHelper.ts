@@ -1,22 +1,13 @@
 import { Page } from "puppeteer";
 
+import type { productsType } from '../type';
+
 const containerSelector = 'li.product-tile-group__list__item';
 const nextItemsButtonSelector = 'div.load-more-button > button';
 
-export type productType = {
-  brand: string
-  productName: string
-  quantity: string
-  listPrice: string
-  itemUnit: string
-  pricePerUnit: string
-  perUnit: string
-};
-
 const queryHelper = async(page:Page) => {
-  await page.waitForSelector(containerSelector);
-
   let isNextItemsButton = true;
+
   try {
     while(isNextItemsButton){
       await page.waitForSelector(containerSelector);
@@ -28,8 +19,6 @@ const queryHelper = async(page:Page) => {
     isNextItemsButton = false;
   };
   
-  await page.waitForSelector(containerSelector);
-
   const data = await page.evaluate(() => {
     const containerSelector = 'li.product-tile-group__list__item';
 
@@ -43,7 +32,7 @@ const queryHelper = async(page:Page) => {
     const pricePerUnitSelector = '.price__value.comparison-price-list__item__price__value';
     const perUnitSelector = '.price__unit.comparison-price-list__item__price__unit';
 
-    const productInfo = [] as productType[];
+    const productInfo = [] as productsType;
     const items = document.querySelectorAll(containerSelector);
 
     if (items){
@@ -56,13 +45,16 @@ const queryHelper = async(page:Page) => {
         const pricePerUnit = item.querySelector(pricePerUnitSelector);
         const perUnite = item.querySelector(perUnitSelector);
 
+        const intListPrice = Number(listPrice?.textContent?.trim().replace("$", ""));
+        const intPricePerUnit = Number(pricePerUnit?.textContent?.trim().replace("$", ""));
+
         productInfo.push({
           brand: brand?.textContent?.trim() || '',
           productName: productName?.textContent?.trim() || '',
           quantity: quantity?.textContent?.trim() || '',
-          listPrice: listPrice?.textContent?.trim() || '',
+          listPrice: intListPrice || 0,
           itemUnit: itemUnit?.textContent?.trim() || '',
-          pricePerUnit: pricePerUnit?.textContent?.trim() || '',
+          pricePerUnit: intPricePerUnit || 0,
           perUnit: perUnite?.textContent?.trim().replace("/ ", "") || '',
         });
       })

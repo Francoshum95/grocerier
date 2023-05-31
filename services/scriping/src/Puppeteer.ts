@@ -8,16 +8,13 @@ export interface PuppeteerT {
   goToSite(site: string): Promise<void>;
 }
 
-
 class Puppeteer implements Puppeteer{
   public page: Page;
   public browser: Browser;
-  private attemp: number;
 
   constructor(){
     this.page = null;
-    this.browser = null;
-    this.attemp = 0; 
+    this.browser = null; 
   }
 
   public async initial(){
@@ -32,29 +29,11 @@ class Puppeteer implements Puppeteer{
   };
   
   public async goToSite(site: string){
-
-    while(true){
-      try {
-        await this.page.goto(site, {
-          waitUntil: "load",
-          timeout: 10000,
-        });
-        break;
-      }catch(error){
-        console.log(`timeout: attemp:${this.attemp} ...`)
-        if (this.attemp >= 10){
-          break;
-        }
-
-        this.page.reload();
-        this.attemp += 1;
-      }
-
-    }
+    await this.page.goto(site, {
+      waitUntil: "load",
+      timeout: 10000,
+    });
   }
-
-  
-
 }
 
 export default Puppeteer;

@@ -1,8 +1,9 @@
-import { writeFile } from "fs";
 import { PuppeteerT } from "../../Puppeteer";
-import { LOBLAWS_BAKERY, LOBLAWS_DAIRY_EGGS, LOBLAWS_DRINKS, LOBLAWS_FRUITS_VEGETABLES, LOBLAWS_HOUSEHOLD_SUPPLIES, LOBLAWS_MEAT, LOBLAWS_PANTRY } from "../../constant/loblaws/site";
 import queryHelper from "../queryHelper";
+import writeToJson from "../writeToJson";
 
+import * as site from '../../constant/loblaws/site';
+import * as constant from '../../constant/common';
 
 class Loblaws{
   private page: PuppeteerT;
@@ -11,62 +12,43 @@ class Loblaws{
     this.page = page
   }
 
-  writeJson(){
-    writeFile('data.json', "", (err: any) => {
-      if (err){
-        console.error('Error writing JSON file:', err);
-
-      } else {
-      console.log('JSON file has been written successfully.');      }
-    });
-  };
-
   async main(){
-    await this.page.goToSite(LOBLAWS_DAIRY_EGGS);
+    await this.page.goToSite(site.LOBLAWS_FRUITS_VEGETABLES);
     const fruite_vegetables = await queryHelper(this.page.page);
 
-    console.log("done... 1/7, LOBLAWS_DAIRY_EGGS")
+    writeToJson(constant.LOBLAWS, constant.CATEGORY_FRUITS_VEGETABLES, fruite_vegetables);
 
-    await this.page.goToSite(LOBLAWS_FRUITS_VEGETABLES);
-    const dairy_and_eggs = await queryHelper(this.page.page);
+    await this.page.goToSite(site.LOBLAWS_DAIRY_EGGS);
+    const dairy_eggs = await queryHelper(this.page.page);
 
-    console.log("done... 2/7, LOBLAWS_FRUITS_VEGETABLES")
+    writeToJson(constant.LOBLAWS, constant.CATEGORY_DAIRY_EGGS, dairy_eggs);
 
-    await this.page.goToSite(LOBLAWS_MEAT);
+    await this.page.goToSite(site.LOBLAWS_MEAT);
     const meat = await queryHelper(this.page.page);
 
-    console.log("done... 3/7, LOBLAWS_MEAT")
+    writeToJson(constant.LOBLAWS, constant.CATEGORY_MEAT, meat);
 
-    await this.page.goToSite(LOBLAWS_BAKERY);
+    await this.page.goToSite(site.LOBLAWS_BAKERY);
     const bakery = await queryHelper(this.page.page);
 
-    console.log("done... 4/7, LOBLAWS_BAKERY")
+    writeToJson(constant.LOBLAWS, constant.CATEGORY_BAKERY, bakery);
 
-    await this.page.goToSite(LOBLAWS_PANTRY);
-    const pantry = await queryHelper(this.page.page);
-    
-    console.log("done... 5/7, LOBLAWS_PANTRY")
+    //// can not handle to many HTML elements
+    // await this.page.goToSite(site.LOBLAWS_PANTRY);
+    // const pantry = await queryHelper(this.page.page);
 
-    await this.page.goToSite(LOBLAWS_HOUSEHOLD_SUPPLIES);
+    // writeToJson(constant.LOBLAWS, constant.CATEGORY_PANTRY, pantry);
+
+    await this.page.goToSite(site.LOBLAWS_HOUSEHOLD_SUPPLIES);
     const household_supplies = await queryHelper(this.page.page);
 
-    console.log("done... 6/7, LOBLAWS_HOUSEHOLD_SUPPLIES")
+    writeToJson(constant.LOBLAWS, constant.CATEGORY_HOUSEHOLD_SUPPLIES, household_supplies);
 
-    await this.page.goToSite(LOBLAWS_DRINKS);
+    await this.page.goToSite(site.LOBLAWS_DRINKS);
     const drinks = await queryHelper(this.page.page);
 
-    console.log("done... 7/7, LOBLAWS_DRINKS")
+    writeToJson(constant.LOBLAWS, constant.CATEGORY_DRINKS, drinks);
 
-    return {
-      fruite_vegetables,
-      dairy_and_eggs,
-      meat,
-      bakery,
-      pantry,
-      household_supplies,
-      drinks
-    }
-    
   }
 }
 
