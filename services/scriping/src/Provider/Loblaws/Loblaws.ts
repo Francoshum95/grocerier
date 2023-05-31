@@ -13,25 +13,25 @@ class Loblaws{
   }
 
   async main(){
-    await this.page.goToSite(site.LOBLAWS_FRUITS_VEGETABLES);
-    const fruite_vegetables = await queryHelper(this.page.page);
+    // await this.page.goToSite(site.LOBLAWS_FRUITS_VEGETABLES);
+    // const fruite_vegetables = await queryHelper(this.page.page);
 
-    writeToJson(constant.LOBLAWS, constant.CATEGORY_FRUITS_VEGETABLES, fruite_vegetables);
+    // writeToJson(constant.LOBLAWS, constant.CATEGORY_FRUITS_VEGETABLES, fruite_vegetables);
 
-    await this.page.goToSite(site.LOBLAWS_DAIRY_EGGS);
-    const dairy_eggs = await queryHelper(this.page.page);
+    // await this.page.goToSite(site.LOBLAWS_DAIRY_EGGS);
+    // const dairy_eggs = await queryHelper(this.page.page);
 
-    writeToJson(constant.LOBLAWS, constant.CATEGORY_DAIRY_EGGS, dairy_eggs);
+    // writeToJson(constant.LOBLAWS, constant.CATEGORY_DAIRY_EGGS, dairy_eggs);
 
-    await this.page.goToSite(site.LOBLAWS_MEAT);
-    const meat = await queryHelper(this.page.page);
+    // await this.page.goToSite(site.LOBLAWS_MEAT);
+    // const meat = await queryHelper(this.page.page);
 
-    writeToJson(constant.LOBLAWS, constant.CATEGORY_MEAT, meat);
+    // writeToJson(constant.LOBLAWS, constant.CATEGORY_MEAT, meat);
 
-    await this.page.goToSite(site.LOBLAWS_BAKERY);
-    const bakery = await queryHelper(this.page.page);
+    // await this.page.goToSite(site.LOBLAWS_BAKERY);
+    // const bakery = await queryHelper(this.page.page);
 
-    writeToJson(constant.LOBLAWS, constant.CATEGORY_BAKERY, bakery);
+    // writeToJson(constant.LOBLAWS, constant.CATEGORY_BAKERY, bakery);
 
     //// can not handle to many HTML elements
     // await this.page.goToSite(site.LOBLAWS_PANTRY);
@@ -39,10 +39,10 @@ class Loblaws{
 
     // writeToJson(constant.LOBLAWS, constant.CATEGORY_PANTRY, pantry);
 
-    await this.page.goToSite(site.LOBLAWS_HOUSEHOLD_SUPPLIES);
-    const household_supplies = await queryHelper(this.page.page);
+    // await this.page.goToSite(site.LOBLAWS_HOUSEHOLD_SUPPLIES);
+    // const household_supplies = await queryHelper(this.page.page);
 
-    writeToJson(constant.LOBLAWS, constant.CATEGORY_HOUSEHOLD_SUPPLIES, household_supplies);
+    // writeToJson(constant.LOBLAWS, constant.CATEGORY_HOUSEHOLD_SUPPLIES, household_supplies);
 
     await this.page.goToSite(site.LOBLAWS_DRINKS);
     const drinks = await queryHelper(this.page.page);
