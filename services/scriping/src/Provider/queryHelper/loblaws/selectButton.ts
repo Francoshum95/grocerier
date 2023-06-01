@@ -9,12 +9,18 @@ const selectButton = async (page:Page) => {
 
   try {
     while(isNextItemsButton){
+      if (count > 40){
+        console.log("stopped ... count greater than 40")
+        break;
+      }
+      
       await page.waitForSelector(containerSelector);
       await page.waitForSelector(nextItemsButtonSelector)
       const button = await page.$(nextItemsButtonSelector);
       await button.click();
       count ++;
-      console.log("click ... ", count)
+      
+      console.log("click: ", count)
     }
   } catch (error){
     isNextItemsButton = false;
