@@ -5,7 +5,7 @@ const path = require('path');
 
 const getPath = (fileName: string) => path.join(__dirname, `../data/${fileName}.json`);
 
-const writeToJson = (fileName: fileNameType, category: categoryType, products: productsType) => {
+const writeToJson = (fileName: fileNameType, category: string, products: productsType) => {
   const jsonPath = getPath(fileName);
 
   try {

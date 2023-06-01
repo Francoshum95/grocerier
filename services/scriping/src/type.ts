@@ -1,13 +1,7 @@
 import * as constant from './constant/common';
 
 export type productType = {
-  brand: string
-  productName: string
-  quantity: string
-  listPrice: number
-  itemUnit: string
-  pricePerUnit: number
-  perUnit: string
+  [key:string]: string | number
 };
 
 export type productsType = productType[];
@@ -19,11 +13,5 @@ export type categoryType = typeof constant.CATEGORY_BAKERY | typeof constant.CAT
   typeof constant.CATEGORY_MEAT | typeof constant.CATEGORY_PANTRY;
 
 export type ProductDataType = {
-  fruite_vegetables?: productsType,
-  dairy_and_eggs?: productsType,
-  meat?: productsType,
-  bakery?: productsType,
-  pantry?: productsType,
-  household_supplies?: productsType,
-  drinks?: productsType
+  [key: string] : productsType
 }
