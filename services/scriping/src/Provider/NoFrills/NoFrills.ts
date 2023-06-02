@@ -1,35 +1,36 @@
 import { PuppeteerT } from "../../Puppeteer";
-import queryHelper from "../queryHelper/";
+import queryHelper from "../queryHelper";
 import writeToJson from "../writeToJson";
 
-import {baseUrl, LOBLAWS_SITE} from '../../constant/loblaws/site';
-import { LOBLAWS } from '../../constant/common';
+import { baseUrl, NOFRILLS_SITE } from "../../constant/nofrills/site"; 
+import { NOFRILLS } from "../../constant/common";
 
-class Loblaws{
+class NoFrills{
   private page: PuppeteerT;
-  
-  constructor(page:PuppeteerT) {
-    this.page = page
-  }
+
+  constructor(page: PuppeteerT){
+    this.page = page;
+  };
 
   async main(){
-
-    for(let k=0; LOBLAWS_SITE.length > k; k ++){
-      await this.page.goToSite(LOBLAWS_SITE[k]);
+    for(let k=0; NOFRILLS_SITE.length > k; k ++){
+      await this.page.goToSite(NOFRILLS_SITE[k]);
       const categorySites = await queryHelper.loblaws.selectWebsite(this.page.page);
 
       for (let i=0; categorySites.length > i; i++){
        await this.page.goToSite(`${baseUrl}${categorySites[i].url}`);
        const subCategorySites = await queryHelper.loblaws.selectWebsite(this.page.page);
+       console.log(subCategorySites);
   
        for (let j=0; subCategorySites.length > j; j++){
          await queryHelper.loblaws.selectButton(this.page.page);
          const data = await queryHelper.loblaws.selectData(this.page.page);
-         writeToJson(LOBLAWS, subCategorySites[j].title, data);
+         writeToJson(NOFRILLS, subCategorySites[j].title, data);
        }
       }
     }
-  }
+
+  };
 }
 
-export default Loblaws;
+export default NoFrills;

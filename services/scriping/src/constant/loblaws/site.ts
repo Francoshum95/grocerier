@@ -3,4 +3,4 @@ const LOBLAWS_HOUSEHOLD_SUPPLIES = "https://www.loblaws.ca/household-supplies/c/
 const LOBLAWS_HEALTH_BEAUTY = "https://www.loblaws.ca/health-beauty/c/27994";
 
 export const baseUrl = "https://www.loblaws.ca";
-export const LOBLAWS = [LOBLAWS_FOOD, LOBLAWS_HOUSEHOLD_SUPPLIES, LOBLAWS_HEALTH_BEAUTY]
+export const LOBLAWS_SITE = [LOBLAWS_FOOD, LOBLAWS_HOUSEHOLD_SUPPLIES, LOBLAWS_HEALTH_BEAUTY];
