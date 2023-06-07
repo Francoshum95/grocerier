@@ -2,7 +2,7 @@ import { Page } from "puppeteer";
 
 import type { productsType } from "../../../type";
 
-const queryHelper = async(page:Page) => {
+const selectData = async(page:Page) => {
   const data = await page.evaluate(() => {
     const containerSelector = 'li.product-tile-group__list__item';
 
@@ -49,4 +49,4 @@ const queryHelper = async(page:Page) => {
   return data;
 };
 
-export default queryHelper;
+export default selectData;

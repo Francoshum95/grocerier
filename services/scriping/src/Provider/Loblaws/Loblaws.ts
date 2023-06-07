@@ -16,15 +16,15 @@ class Loblaws{
 
     for(let k=0; LOBLAWS_SITE.length > k; k ++){
       await this.page.goToSite(LOBLAWS_SITE[k]);
-      const categorySites = await queryHelper.loblaws.selectWebsite(this.page.page);
+      const categorySites = await queryHelper.loblaws.loblawsWebsites(this.page.page);
 
       for (let i=0; categorySites.length > i; i++){
        await this.page.goToSite(`${baseUrl}${categorySites[i].url}`);
-       const subCategorySites = await queryHelper.loblaws.selectWebsite(this.page.page);
+       const subCategorySites = await queryHelper.loblaws.loblawsWebsites(this.page.page);
   
        for (let j=0; subCategorySites.length > j; j++){
-         await queryHelper.loblaws.selectButton(this.page.page);
-         const data = await queryHelper.loblaws.selectData(this.page.page);
+         await queryHelper.loblaws.loblawsButton(this.page.page);
+         const data = await queryHelper.loblaws.loblawsData(this.page.page);
          writeToJson(LOBLAWS, subCategorySites[j].title, data);
        }
       }
