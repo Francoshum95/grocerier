@@ -6,6 +6,7 @@ export interface PuppeteerT {
   browser: Browser | null;
   initial(): Promise<void>;
   goToSite(site: string): Promise<void>;
+  screenShot(): Promise<void>;
 }
 
 class Puppeteer implements Puppeteer{
@@ -33,6 +34,13 @@ class Puppeteer implements Puppeteer{
       waitUntil: "load",
       timeout: 10000,
     });
+  }
+
+  public async screenShot(){
+    await this.page.screenshot({
+      fullPage: true,
+      path: "./test.jpg"
+    })
   }
 }
 
