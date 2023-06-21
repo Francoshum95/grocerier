@@ -8,14 +8,16 @@ const selectWebsite = async(page: Page) => {
   const webSiteData = await page.evaluate(() => {
     const websites = [] as {title: string, url: string} [];
 
-    const items = document.querySelectorAll("div.col-xs-6.col-md-3");
+    const items = document.querySelectorAll("span.description");
+
+    console.log("testiong item", items
+
+
     if (items){
       items.forEach(item => {
-        const urlItem = item.querySelector("a");
-        const url = urlItem.getAttribute('href');
 
-        const titleItem = item.querySelector("h3.category-tile-title");
-        const title = titleItem.textContent?.trim() || "";
+        const url = item.getAttribute('href');
+        const title = item?.textContent?.trim() || "";
 
         if (url){
           websites.push({

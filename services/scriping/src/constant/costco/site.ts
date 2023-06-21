@@ -1,0 +1,1 @@
+export const COSTCO_PAPER_PASTIC = "https://www.costco.ca/paper-plastic-products.html";
